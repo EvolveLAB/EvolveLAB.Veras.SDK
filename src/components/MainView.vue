@@ -15,10 +15,14 @@
           Veras Integration for Vue.js + TypeScript App
         </h1>
 
-        <v-btn prepend-icon="$vuetify">
+        <v-btn prepend-icon="mdi-open-in-new">
           <a @click="startVeras">Start Veras</a>
         </v-btn>
       </v-col>
+
+      <div >
+        <i-frame src="https://veras.evolvelab.io/" title="verasLink"></i-frame>
+      </div>
 
 
 
@@ -33,11 +37,12 @@ import { defineComponent } from 'vue'
 
 
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'MainView',
 
   methods: {
     startVeras: function () {
-      alert("test alert");
+      // alert("test alert");
+      console.log("test");
     },
   }
 })
