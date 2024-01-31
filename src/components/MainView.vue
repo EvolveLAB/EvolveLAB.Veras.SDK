@@ -6,8 +6,13 @@
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right" 
       ref="grabBar" >
-      <v-btn density="compact" icon="mdi-close" variant="plain" align="right" class="flex mb-1"></v-btn>
-
+      <v-btn 
+        density="compact" 
+        icon="mdi-close" 
+        variant="plain"
+        class="mb-1"
+        @click="startVeras">
+      </v-btn>
       <iframe 
         class="flex m-auto h-100 w-100 pb-8"
         src="https://veras.evolvelab.io/"
@@ -36,8 +41,9 @@
           Veras Integration for Vue.js + TypeScript App
         </h1>
 
-        <v-btn prepend-icon="mdi-open-in-new">
-          <a @click="startVeras">Start Veras</a>
+        <v-btn prepend-icon="mdi-open-in-new"
+          @click="startVeras">
+          Start Veras
         </v-btn>
       </v-col>
 
@@ -116,8 +122,8 @@ export default defineComponent({
 }
 
 .veras-dragmask {
-    top: 0;
     position: absolute;
+    padding: 8px;
     z-index: 20;
 }
 
