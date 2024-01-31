@@ -3,23 +3,33 @@
     <h1>{{ msg }}</h1>
     <p>
       <button>
-        Start Veras
+        <a @click="startVeras">Start Veras</a>
       </button>
     </p>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+
+export default defineComponent({
   props: {
-    msg: String
+    msg: {
+      type: String,
+      required: false,
+      default: "testMessage"
+    }
+  },
+
+  methods: {
+    startVeras: function () {
+      alert("test alert");
+    },
   }
 })
-export default class HelloWorld extends Vue {
-  msg!: string
-}
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
