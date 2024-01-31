@@ -1,6 +1,17 @@
 <template>
-  <div>
-    <VerasContainer/>
+  <div 
+    ref="draggableContainer" 
+    class="veras-modal flex" 
+    @mousedown="dragMouseDown">
+    <div class="flex 
+      h-100 
+      w-100" 
+      ref="grabBar" >
+      <iframe 
+        class="flex m-auto h-100 w-100"
+        src="https://veras.evolvelab.io/">
+      </iframe>
+      </div>
   </div>
   <v-container>
     <v-row class="text-center">
@@ -31,30 +42,70 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
-import VerasContainer from './VerasContainer.vue'
 
 
 export default defineComponent({
   name: 'MainView',
   components: {
-    VerasContainer
   },
   methods: {
     startVeras: function () {
       // alert("test alert");
       console.log("test");
     },
+    //ref: https://javascript.info/mouse-drag-and-drop
+    dragMouseDown(event: MouseEvent): void {
+      event.preventDefault();
+      const draggableContainer = this.$refs.draggableContainer as HTMLElement;
+
+      let shiftX: number = event.clientX - draggableContainer.getBoundingClientRect().left;
+      let shiftY: number = event.clientY - draggableContainer.getBoundingClientRect().top;
+
+      draggableContainer.style.position = 'absolute';
+      draggableContainer.style.width = '850px';
+      draggableContainer.style.zIndex = '1000';
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX: number, pageY: number): void {
+        draggableContainer.style.left = pageX - shiftX + 'px';
+        draggableContainer.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event: MouseEvent): void {
+        moveAt(event.pageX, event.pageY);
+      }
+
+      window.addEventListener('mousemove', onMouseMove);
+
+      window.onmouseup = function (): void {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.onmouseup = null;
+        window.onmouseout = null;
+      };
+
+      window.onmouseout = function (): void {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.onmouseout = null;
+        window.onmouseup = null;
+      };
+    }
   }
 })
 </script>
 
 <style scoped>
 .veras-modal {
-  display: inline-block;
-  position: absolute;
-  z-index: 100;
-  width: 850px;
-  height: 800px;
+    width: 850px;
+    height: 850px;
+    padding: 16px;
+    margin: auto auto;
+    background: #eee;
+    left: "0px";
+    top: "0px";
+    position: absolute;
+    border-radius: 4px;
+    filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
 }
 
 </style>
