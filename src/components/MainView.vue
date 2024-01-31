@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <VerasContainer/>
+  </div>
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
@@ -20,25 +23,22 @@
         </v-btn>
       </v-col>
 
-      <div >
-        <i-frame src="https://veras.evolvelab.io/" title="verasLink"></i-frame>
-      </div>
-
-
-
-
-
     </v-row>
   </v-container>
+  
+
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue'
+import VerasContainer from './VerasContainer.vue'
 
 
 export default defineComponent({
   name: 'MainView',
-
+  components: {
+    VerasContainer
+  },
   methods: {
     startVeras: function () {
       // alert("test alert");
@@ -47,3 +47,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.veras-modal {
+  display: inline-block;
+  position: absolute;
+  z-index: 100;
+  width: 850px;
+  height: 800px;
+}
+
+</style>
