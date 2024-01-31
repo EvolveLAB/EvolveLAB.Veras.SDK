@@ -9,8 +9,14 @@
       ref="grabBar" >
       <iframe 
         class="flex m-auto h-100 w-100"
-        src="https://veras.evolvelab.io/">
+        src="https://veras.evolvelab.io/"
+        frameBorder="0">
       </iframe>
+      <div
+        v-show="isDragging"
+        v-on:click="isDragging = !isDragging"
+        class="veras-dragmask h-100 w-100">
+      </div>
       </div>
   </div>
   <v-container>
@@ -48,6 +54,12 @@ export default defineComponent({
   name: 'MainView',
   components: {
   },
+  data: function () {
+    return {
+      // hack to keep the mousemove active when hovering over the i-frame
+      isDragging: false,
+    };
+  },
   methods: {
     startVeras: function () {
       // alert("test alert");
@@ -57,6 +69,7 @@ export default defineComponent({
     dragMouseDown(event: MouseEvent): void {
       event.preventDefault();
       const draggableContainer = this.$refs.draggableContainer as HTMLElement;
+      this.isDragging = true;
 
       let shiftX: number = event.clientX - draggableContainer.getBoundingClientRect().left;
       let shiftY: number = event.clientY - draggableContainer.getBoundingClientRect().top;
@@ -81,13 +94,6 @@ export default defineComponent({
       window.onmouseup = function (): void {
         window.removeEventListener('mousemove', onMouseMove);
         window.onmouseup = null;
-        window.onmouseout = null;
-      };
-
-      window.onmouseout = function (): void {
-        window.removeEventListener('mousemove', onMouseMove);
-        window.onmouseout = null;
-        window.onmouseup = null;
       };
     }
   }
@@ -106,6 +112,12 @@ export default defineComponent({
     position: absolute;
     border-radius: 4px;
     filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+}
+
+.veras-dragmask {
+    top: 0;
+    position: absolute;
+    z-index: 20;
 }
 
 </style>
