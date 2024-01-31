@@ -1,14 +1,15 @@
 <template>
   <div 
     ref="draggableContainer" 
-    class="veras-modal flex" 
+    v-show="showVerasPane"
+    class="veras-modal " 
     @mousedown="dragMouseDown">
-    <div class="flex 
-      h-100 
-      w-100" 
+    <div class="flex h-100 w-100 text-right" 
       ref="grabBar" >
+      <v-btn density="compact" icon="mdi-close" variant="plain" align="right" class="flex mb-1"></v-btn>
+
       <iframe 
-        class="flex m-auto h-100 w-100"
+        class="flex m-auto h-100 w-100 pb-8"
         src="https://veras.evolvelab.io/"
         frameBorder="0">
       </iframe>
@@ -17,7 +18,7 @@
         v-on:click="isDragging = !isDragging"
         class="veras-dragmask h-100 w-100">
       </div>
-      </div>
+    </div>
   </div>
   <v-container>
     <v-row class="text-center">
@@ -56,14 +57,14 @@ export default defineComponent({
   },
   data: function () {
     return {
+      showVerasPane: true,
       // hack to keep the mousemove active when hovering over the i-frame
       isDragging: false,
     };
   },
   methods: {
     startVeras: function () {
-      // alert("test alert");
-      console.log("test");
+      this.showVerasPane = !this.showVerasPane;
     },
     //ref: https://javascript.info/mouse-drag-and-drop
     dragMouseDown(event: MouseEvent): void {
@@ -104,7 +105,7 @@ export default defineComponent({
 .veras-modal {
     width: 850px;
     height: 850px;
-    padding: 16px;
+    padding: 8px;
     margin: auto auto;
     background: #eee;
     left: "0px";
