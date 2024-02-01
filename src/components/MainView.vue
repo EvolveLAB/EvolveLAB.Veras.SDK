@@ -1,7 +1,7 @@
 <template>
   <div 
     ref="draggableContainer" 
-    v-show="showVerasPane"
+    v-if="showVerasPane"
     class="veras-modal " 
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right" 
@@ -36,7 +36,7 @@
         />
       </v-col>
 
-      <v-col class="mb-4">
+      <v-col class="mb-4 ">
         <h1 class="display-2 font-weight-bold mb-3">
           Veras Integration for Vue.js + TypeScript App
         </h1>
@@ -45,8 +45,19 @@
           @click="startVeras">
           Start Veras
         </v-btn>
-      </v-col>
 
+        
+        <v-btn prepend-icon="mdi-clear" ref="clearCanvas" 
+          >
+          Clear Canvas
+        </v-btn>
+
+        
+      </v-col>
+      
+    </v-row>
+    <v-row class="text-cente">
+      <canvas id='demo'></canvas>
     </v-row>
   </v-container>
   
@@ -54,7 +65,8 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+import { fabric } from 'fabric';
 
 
 export default defineComponent({
@@ -63,7 +75,7 @@ export default defineComponent({
   },
   data: function () {
     return {
-      showVerasPane: true,
+      showVerasPane: false,
       // hack to keep the mousemove active when hovering over the i-frame
       isDragging: false,
     };
@@ -103,6 +115,21 @@ export default defineComponent({
         window.onmouseup = null;
       };
     }
+  },
+  mounted(){
+      const canvas = new fabric.Canvas('demo',{
+        width:800,
+        height:500,
+        isDrawingMode: true,
+        backgroundColor:'skyblue'
+      })
+
+      const clearEl = this.$refs.clearCanvas as HTMLElement;
+      clearEl.click = function() { 
+        canvas.clear() 
+      };
+
+      console.log(canvas)
   }
 })
 </script>
