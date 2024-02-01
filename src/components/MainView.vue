@@ -130,9 +130,34 @@ export default defineComponent({
         isDrawingMode: true,
         backgroundColor:'skyblue'
       })
+      //console.log(this.fabricCanvas)
 
+      // more on post message security: https://gist.github.com/jedp/3005816
+      window.addEventListener(
+        "message",
+        (event: any) => {
+          // Ensure the message is from a trusted source (optional, but recommended)
+          if (event.origin !== "http://localhost:8081") return;
+          //console.log("received a Veras message")
 
-      console.log(this.fabricCanvas)
+          // Handle the message
+          const receivedMessage = event.data;
+          //console.log('Message received from Veras:', receivedMessage);
+
+          if(receivedMessage.key == "getImage"){
+            // get image string from canvas
+            let imageString: string = this.fabricCanvas.toDataURL();
+            // send a callback to the Veras iframe
+            const callbackMessage = {
+              key: 'imagePayload',
+              data: imageString,
+          };
+
+          event.source?.postMessage(callbackMessage, event.origin);
+          }
+        },
+        false,
+      );
   }
 })
 </script>
