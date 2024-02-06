@@ -50,7 +50,7 @@
           Start Veras
         </v-btn>
 
-        <v-btn prepend-icon="mdi-clear" 
+        <v-btn prepend-icon="mdi-eraser" 
           ref="clearCanvas" 
           class="mx-1"
           @click="clearCanvas">
@@ -81,7 +81,7 @@ export default defineComponent({
   data: function () {
     return {
       showVerasPane: false,
-      // hack to keep the mousemove active when hovering over the i-frame
+      // hack to keep the mousemove active when hovering over the i-frame 
       isDragging: false,
       fabricCanvas: (null as any | fabric.Canvas)
     };
@@ -133,10 +133,8 @@ export default defineComponent({
         isDrawingMode: true,
         backgroundColor:'skyblue'
       })
-      //console.log(this.fabricCanvas)
 
-      // connect to Veras
-      // more on post message security: https://gist.github.com/jedp/3005816
+      // Connect to Veras
       window.addEventListener(
         "message",
         (event: any) => {
@@ -145,27 +143,19 @@ export default defineComponent({
 
           // Handle the message
           const receivedMessage = event.data;
-          //console.log('Message received from Veras:', receivedMessage);
 
-          // register app with Veras iframe
+          // Register app with Veras iframe
           if (receivedMessage.key == "registerAppRequest"){
-            event.source?.postMessage({
-              key: 'registerAppResponse',
-              data: 'Your App Name HERE',
-              }, 
-              event.origin);
+            // Replace 'YOUR APP NAME'
+            event.source?.postMessage({key: 'registerAppResponse', data: 'YOUR APP NAME',}, event.origin);
           }
 
-          // get base64 image string from canvas
+          // Get base64 image string from canvas
           else if (receivedMessage.key == "getImage"){
-            // can be replaced with other ways of extracting the image
+            // imageString can be replaced with other ways of extracting the image
             let imageString: string = this.fabricCanvas.toDataURL();
-            // send image data to Veras iframe
-            event.source?.postMessage({
-              key: 'imagePayload',
-              data: imageString,
-              }, 
-              event.origin);
+            // Send image data to Veras iframe
+            event.source?.postMessage({key: 'imagePayload', data: imageString,}, event.origin);
           }
         },
         false,
