@@ -6,21 +6,24 @@
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right" 
       ref="grabBar" >
-      <v-btn 
-        density="compact" 
-        icon="mdi-close" 
-        variant="plain"
-        class="mb-1"
-        @click="startVeras">
-      </v-btn>
+      <div class="d-flex justify-space-between">
+        <label class="h-50 text-body-2 mt-1">EvolveLAB Veras | 1.5.1.2</label>
+        <v-btn 
+          density="compact" 
+          icon="mdi-close" 
+          variant="plain"
+          class="mb-1"
+          @click="startVeras">
+        </v-btn>
+      </div>
       <div
         v-show="isDragging"
         v-on:click="isDragging = !isDragging"
         class="veras-dragmask h-100 w-100">
       </div>
-      <iframe 
+      <iframe
         class="flex m-auto h-100 w-100 pb-8"
-        src="http://localhost:8081/"
+        src="https://veras.evolvelab.io"
         frameBorder="0">
       </iframe>
     </div>
@@ -132,28 +135,37 @@ export default defineComponent({
       })
       //console.log(this.fabricCanvas)
 
+      // connect to Veras
       // more on post message security: https://gist.github.com/jedp/3005816
       window.addEventListener(
         "message",
         (event: any) => {
           // Ensure the message is from a trusted source (optional, but recommended)
-          if (event.origin !== "http://localhost:8081") return;
-          //console.log("received a Veras message")
+          if (event.origin !== "https://veras.evolvelab.io") return;
 
           // Handle the message
           const receivedMessage = event.data;
           //console.log('Message received from Veras:', receivedMessage);
 
-          if(receivedMessage.key == "getImage"){
-            // get image string from canvas
+          // register app with Veras iframe
+          if (receivedMessage.key == "registerAppRequest"){
+            event.source?.postMessage({
+              key: 'registerAppResponse',
+              data: 'Your App Name HERE',
+              }, 
+              event.origin);
+          }
+
+          // get base64 image string from canvas
+          else if (receivedMessage.key == "getImage"){
+            // can be replaced with other ways of extracting the image
             let imageString: string = this.fabricCanvas.toDataURL();
-            // send a callback to the Veras iframe
-            const callbackMessage = {
+            // send image data to Veras iframe
+            event.source?.postMessage({
               key: 'imagePayload',
               data: imageString,
-          };
-
-          event.source?.postMessage(callbackMessage, event.origin);
+              }, 
+              event.origin);
           }
         },
         false,
