@@ -6,21 +6,24 @@
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right" 
       ref="grabBar" >
-      <v-btn 
-        density="compact" 
-        icon="mdi-close" 
-        variant="plain"
-        class="mb-1"
-        @click="startVeras">
-      </v-btn>
+      <div class="d-flex justify-space-between">
+        <label class="h-50 text-body-2 mt-1">EvolveLAB Veras | 1.5.1.2</label>
+        <v-btn 
+          density="compact" 
+          icon="mdi-close" 
+          variant="plain"
+          class="mb-1"
+          @click="startVeras">
+        </v-btn>
+      </div>
       <div
         v-show="isDragging"
         v-on:click="isDragging = !isDragging"
         class="veras-dragmask h-100 w-100">
       </div>
-      <iframe 
+      <iframe
         class="flex m-auto h-100 w-100 pb-8"
-        src="http://localhost:8081/"
+        src="https://veras.evolvelab.io"
         frameBorder="0">
       </iframe>
     </div>
@@ -47,7 +50,7 @@
           Start Veras
         </v-btn>
 
-        <v-btn prepend-icon="mdi-clear" 
+        <v-btn prepend-icon="mdi-eraser" 
           ref="clearCanvas" 
           class="mx-1"
           @click="clearCanvas">
@@ -78,7 +81,7 @@ export default defineComponent({
   data: function () {
     return {
       showVerasPane: false,
-      // hack to keep the mousemove active when hovering over the i-frame
+      // hack to keep the mousemove active when hovering over the i-frame 
       isDragging: false,
       fabricCanvas: (null as any | fabric.Canvas)
     };
@@ -131,8 +134,32 @@ export default defineComponent({
         backgroundColor:'skyblue'
       })
 
+      // Connect to Veras
+      window.addEventListener(
+        "message",
+        (event: any) => {
+          // Ensure the message is from a trusted source (optional, but recommended)
+          if (event.origin !== "https://veras.evolvelab.io") return;
 
-      console.log(this.fabricCanvas)
+          // Handle the message
+          const receivedMessage = event.data;
+
+          // Register app with Veras iframe
+          if (receivedMessage.key == "registerAppRequest"){
+            // Replace 'YOUR APP NAME'
+            event.source?.postMessage({key: 'registerAppResponse', data: 'YOUR APP NAME',}, event.origin);
+          }
+
+          // Get base64 image string from canvas
+          else if (receivedMessage.key == "getImage"){
+            // imageString can be replaced with other ways of extracting the image
+            let imageString: string = this.fabricCanvas.toDataURL();
+            // Send image data to Veras iframe
+            event.source?.postMessage({key: 'imagePayload', data: imageString,}, event.origin);
+          }
+        },
+        false,
+      );
   }
 })
 </script>
