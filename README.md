@@ -1,6 +1,6 @@
 ![2024-02-01 - 03-01-16 - vlc](https://github.com/EvolveLAB/Veras-3rdParty-vue-ts-integration/assets/107583178/d1119dd0-1798-4bb0-a258-401ed3c1d682)
 
-# Veras Integration for Web apps
+# Veras Integration for Web Apps
 ### About the integration
 * Veras can be added a web app as an extension
 * Veras is setup as an iframe in the parent app
