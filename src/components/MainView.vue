@@ -1,7 +1,7 @@
 <template>
   <div 
     ref="draggableContainer" 
-    v-show="showVerasPane"
+    v-if="showVerasPane"
     class="veras-modal " 
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right" 
@@ -13,16 +13,16 @@
         class="mb-1"
         @click="startVeras">
       </v-btn>
-      <iframe 
-        class="flex m-auto h-100 w-100 pb-8"
-        src="https://veras.evolvelab.io/"
-        frameBorder="0">
-      </iframe>
       <div
         v-show="isDragging"
         v-on:click="isDragging = !isDragging"
         class="veras-dragmask h-100 w-100">
       </div>
+      <iframe 
+        class="flex m-auto h-100 w-100 pb-8"
+        src="http://localhost:8081/"
+        frameBorder="0">
+      </iframe>
     </div>
   </div>
   <v-container>
@@ -36,17 +36,30 @@
         />
       </v-col>
 
-      <v-col class="mb-4">
+      <v-col cols="12" class="mb-4 ">
         <h1 class="display-2 font-weight-bold mb-3">
           Veras Integration for Vue.js + TypeScript App
         </h1>
 
         <v-btn prepend-icon="mdi-open-in-new"
+          class="mx-1"
           @click="startVeras">
           Start Veras
         </v-btn>
-      </v-col>
 
+        <v-btn prepend-icon="mdi-clear" 
+          ref="clearCanvas" 
+          class="mx-1"
+          @click="clearCanvas">
+          Clear Canvas
+        </v-btn>
+
+        
+      </v-col>
+      
+    </v-row>
+    <v-row justify="center">
+      <canvas id='demo' class="text-cente"></canvas>
     </v-row>
   </v-container>
   
@@ -54,7 +67,8 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+import { fabric } from 'fabric';
 
 
 export default defineComponent({
@@ -63,14 +77,19 @@ export default defineComponent({
   },
   data: function () {
     return {
-      showVerasPane: true,
+      showVerasPane: false,
       // hack to keep the mousemove active when hovering over the i-frame
       isDragging: false,
+      fabricCanvas: (null as any | fabric.Canvas)
     };
   },
   methods: {
     startVeras: function () {
       this.showVerasPane = !this.showVerasPane;
+    },
+    clearCanvas: function () {
+      this.fabricCanvas.clear();
+      this.fabricCanvas.backgroundColor = 'skyblue';
     },
     //ref: https://javascript.info/mouse-drag-and-drop
     dragMouseDown(event: MouseEvent): void {
@@ -103,6 +122,17 @@ export default defineComponent({
         window.onmouseup = null;
       };
     }
+  },
+  mounted(){
+      this.fabricCanvas = new fabric.Canvas('demo',{
+        width:800,
+        height:500,
+        isDrawingMode: true,
+        backgroundColor:'skyblue'
+      })
+
+
+      console.log(this.fabricCanvas)
   }
 })
 </script>
@@ -118,6 +148,7 @@ export default defineComponent({
     top: "0px";
     position: absolute;
     border-radius: 4px;
+    z-index: 10;
     filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
 }
 
