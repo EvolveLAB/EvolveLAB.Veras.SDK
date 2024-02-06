@@ -2,10 +2,9 @@
   <div 
     ref="draggableContainer" 
     v-if="showVerasPane"
-    class="veras-modal " 
+    class="veras-modal" 
     @mousedown="dragMouseDown">
-    <div class="flex h-100 w-100 text-right" 
-      ref="grabBar" >
+    <div class="flex h-100 w-100 text-right">
       <div class="d-flex justify-space-between">
         <label class="h-50 text-body-2 mt-1">EvolveLAB Veras | 1.5.1.2</label>
         <v-btn 
