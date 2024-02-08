@@ -128,6 +128,7 @@ mounted(){
 * add a way to resize the Veras window
 * fix first click on the Veras UI being ignored, after moving the Veras window
 * add other tech stacks for implementation (let us know if you want to see more examples)
+* sample code to scale the canvas resolution
 
 ### Implementation
 * create a package to simplify amout of code needed for integrating
