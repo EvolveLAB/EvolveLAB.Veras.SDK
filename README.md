@@ -131,3 +131,4 @@ mounted(){
 
 ### Implementation
 * create a package to simplify amout of code needed for integrating
+* ability to sync up colors for an on-brand look / feel
