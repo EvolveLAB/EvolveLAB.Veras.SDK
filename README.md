@@ -132,4 +132,5 @@ mounted(){
 
 ### Implementation
 * create a package to simplify amout of code needed for integrating
+* add developer mode for loading the UI without user login
 * ability to sync up colors for an on-brand look / feel
