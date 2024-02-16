@@ -132,6 +132,7 @@ mounted(){
 * sample code to scale the canvas resolution
 
 ### Implementation
-* create a package to simplify amout of code needed for integrating
-* add developer mode for loading the UI without user login
+* send aspect ratio from parent app
 * ability to sync up colors for an on-brand look / feel
+* add developer mode for loading the UI without user login
+* create a package to simplify amout of code needed for integrating
