@@ -6,7 +6,7 @@
     @mousedown="dragMouseDown">
     <div class="flex h-100 w-100 text-right">
       <div class="d-flex justify-space-between">
-        <label class="h-50 text-body-2 mt-1">EvolveLAB Veras | 1.5.1.2</label>
+        <label class="h-50 text-body-2 mt-1">EvolveLAB Veras</label>
         <v-btn 
           density="compact" 
           icon="mdi-close" 
