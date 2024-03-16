@@ -23,5 +23,5 @@ pnpm-debug.log*
 *.sw?
 /.vs
 /DotNetSample/.vs
-/DotNetSample/VerasDotNetSample/bin/Debug/net7.0-windows
+/DotNetSample/VerasDotNetSample/bin
 /DotNetSample/VerasDotNetSample/obj
