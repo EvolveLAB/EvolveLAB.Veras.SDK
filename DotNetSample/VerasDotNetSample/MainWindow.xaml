@@ -19,6 +19,7 @@
             Content="Open Veras"
             Click="Button_Click"/>
         <h:HelixViewport3D
+            x:Name="HelixView"
             Grid.Row="1">
             <h:DefaultLights/>
             <h:Teapot/>
