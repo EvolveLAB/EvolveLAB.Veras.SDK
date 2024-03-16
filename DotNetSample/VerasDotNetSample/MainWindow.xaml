@@ -22,7 +22,7 @@
             x:Name="HelixView"
             Grid.Row="1">
             <h:DefaultLights/>
-            <h:Teapot/>
+            <ModelVisual3D x:Name="modelRoot"/>
         </h:HelixViewport3D>
 
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using HelixToolkit.Wpf;
+using System.Windows;
 
 namespace VerasDotNetSample
 {
@@ -10,6 +11,10 @@ namespace VerasDotNetSample
         public MainWindow()
         {
             InitializeComponent();
+
+            // load 3d model
+            ModelImporter modelImporter = new ModelImporter();
+            modelRoot.Content = modelImporter.Load("evolveLabLogo.3ds");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
