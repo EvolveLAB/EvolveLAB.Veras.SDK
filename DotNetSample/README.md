@@ -1,6 +1,6 @@
 ![2024-03-16 - 09-22-03](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/assets/107583178/a2acf59b-0f16-4b89-9e38-fbe1b6959cf7)
 
-# Veras Web App Integration Sample
+# Veras .NET App Integration Sample
 Sample project stack:
 * [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
