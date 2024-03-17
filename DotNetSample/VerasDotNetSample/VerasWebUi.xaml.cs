@@ -102,11 +102,11 @@ namespace VerasDotNetSample
         private void GetImage()
         {
             // get the image (using helix toolkit as an example)
-            string basImage = ImageCapture.GetPreviewImageBase64String();
+            string baseImage = ImageCapture.GetPreviewImageBase64String();
 
             // send the image to Veras
             dynamic payload = new ExpandoObject();
-            payload.image = basImage;
+            payload.image = baseImage;
             
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";
