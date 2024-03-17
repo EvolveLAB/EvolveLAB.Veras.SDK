@@ -25,3 +25,5 @@ pnpm-debug.log*
 /DotNetSample/.vs
 /DotNetSample/VerasDotNetSample/bin
 /DotNetSample/VerasDotNetSample/obj
+/WebAppSample/dist
+/WebAppSample/node_modules
