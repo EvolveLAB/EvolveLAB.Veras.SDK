@@ -1,4 +1,4 @@
-![2024-03-16 - 09-22-03](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/assets/107583178/a2acf59b-0f16-4b89-9e38-fbe1b6959cf7)
+![2024-03-16 - 22-49-41 - vlc](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/assets/107583178/a032fb19-79e4-4bdd-9b3a-a6401c06c283)
 
 # Veras .NET App Integration Sample
 Sample project stack:
