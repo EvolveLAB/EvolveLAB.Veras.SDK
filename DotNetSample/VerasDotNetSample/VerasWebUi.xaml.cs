@@ -24,8 +24,7 @@ namespace VerasDotNetSample
         private async void InitializeWebView()
         {
             await webView.EnsureCoreWebView2Async(null);
-            //webView.Source = new Uri("https://veras.evolvelab.io/");
-            webView.Source = new Uri("http://localhost:8080/");
+            webView.Source = new Uri("https://veras.evolvelab.io/");
 
             // open new windows in default browser instead of the webview
             webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
@@ -60,15 +59,16 @@ namespace VerasDotNetSample
                 case "getImage":
                     GetImage();
                     break;
-                // optional - auto saves the rendering to a folder
+                // optional - auto saves the rendering to a folder, or other internal logic
+                // this is called every time a new render is generated
                 case "saveRenderingToFolder":
                     ReceivedRenderHandler(result);
                     break;
-                // optional when including file-system access
+                // optional when enabling `useSystemAccess` in the `RegisterApp()` callback
                 case "setRenderingsFolder":
                     // implement a way to set a folder for auto-saved renders
                     break;
-                // optional when including file-system access
+                // optional when enabling `useSystemAccess` in the `RegisterApp()` callback
                 case "openrenderingsfolder":
                     // implement a way to set a folder for auto-saved renders
                     break;
@@ -102,11 +102,11 @@ namespace VerasDotNetSample
         private void GetImage()
         {
             // get the image (using helix toolkit as an example)
-            ImageCapture.CapturePreviewImageBase64String();
+            string basImage = ImageCapture.GetPreviewImageBase64String();
 
             // send the image to Veras
             dynamic payload = new ExpandoObject();
-            payload.image = ImageCapture.baseImage;
+            payload.image = basImage;
             
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";

@@ -5,9 +5,11 @@ using HelixToolkit.Wpf;
 
 namespace VerasDotNetSample
 {
+    /// <summary>
+    /// Class handles getting an image from the sample design app, and storing the image as a base64 string
+    /// </summary>
     public class ImageCapture
     {
-        public string baseImage { get; set; } = "";
         private HelixViewport3D HelixView;
 
         public ImageCapture(HelixViewport3D helixView)
@@ -15,11 +17,12 @@ namespace VerasDotNetSample
             this.HelixView = helixView;
         }
 
-        public void CapturePreviewImageBase64String()
+        public string GetPreviewImageBase64String()
         {
             string filePath = GetOrCreateImagePath();
             Viewport3DHelper.Export(HelixView.Viewport, filePath, new SolidColorBrush(Color.FromRgb(255,255,255)));
-            baseImage = ReadBase64ImageFromFile(filePath);
+            string baseImage = ReadBase64ImageFromFile(filePath);
+            return baseImage;
         }
 
         private string GetOrCreateImagePath()
