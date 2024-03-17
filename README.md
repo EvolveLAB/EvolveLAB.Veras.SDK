@@ -21,9 +21,9 @@ Check out the web integration sample in action here: https://evolvelab.github.io
   * some of the events require a callback to be sent back to Veras using webview2
 
 ### This Repo
-* [**Veras Web App Integration**](#-Veras-Web-App-Integration-Sample)
+* [**Veras Web App Integration**](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/tree/main/DotNetSample)
   * a sample project with the Veras implementation is provided
   * steps to add Veras to your own web app
-* [**Veras .NET App Integration**](#-Veras-NET-App-Integration-Sample)
+* [**Veras .NET App Integration**](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/tree/main/WebAppSample)
   * a sample project with the Veras implementation is provided
   * steps to add Veras to your own .NET app
