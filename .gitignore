@@ -22,3 +22,8 @@ pnpm-debug.log*
 *.sln
 *.sw?
 /.vs
+/DotNetSample/.vs
+/DotNetSample/VerasDotNetSample/bin
+/DotNetSample/VerasDotNetSample/obj
+/WebAppSample/dist
+/WebAppSample/node_modules
