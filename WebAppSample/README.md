@@ -1,4 +1,5 @@
-![2024-02-01 - 03-01-16 - vlc](https://github.com/EvolveLAB/Veras-3rdParty-vue-ts-integration/assets/107583178/d1119dd0-1798-4bb0-a258-401ed3c1d682)
+![2024-03-18 - 17-12-30 - vlc](https://github.com/EvolveLAB/EvolveLAB.Veras.SDK/assets/107583178/bdda8384-e3d8-4c3c-9308-9b3bcfaad391)
+
 
 # Veras Web App Integration Sample
 Sample project stack:
