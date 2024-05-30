@@ -25,6 +25,8 @@ namespace VerasDotNetSample
         {
             await webView.EnsureCoreWebView2Async(null);
             webView.Source = new Uri("https://veras.evolvelab.io/");
+            //dev
+            //webView.Source = new Uri("http://localhost:8080/");
 
             // open new windows in default browser instead of the webview
             webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
