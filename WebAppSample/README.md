@@ -113,13 +113,13 @@ mounted(){
 
 # TODO
 ### Sample Project
-* add a way to resize the Veras window
-* fix first click on the Veras UI being ignored, after moving the Veras window
-* add other tech stacks for implementation (let us know if you want to see more examples)
-* sample code to scale the canvas resolution
+- [ ] add a way to resize the Veras window
+- [ ] fix first click on the Veras UI being ignored, after moving the Veras window
+- [ ] add other tech stacks for implementation (let us know if you want to see more examples)
+- [ ] sample code to scale the canvas resolution
 
 ### Implementation
-* send aspect ratio from parent app
-* ability to sync up colors for an on-brand look / feel
-* add developer mode for loading the UI without user login
-* create a package to simplify amout of code needed for integrating
+- [ ] send aspect ratio from parent app
+- [ ] ability to sync up colors for an on-brand look / feel
+- [ ] add developer mode for loading the UI without user login
+- [ ] create a package to simplify amount of code needed for integrating
