@@ -131,7 +131,8 @@ namespace VerasDotNetSample
 
             dynamic payload = new ExpandoObject();
             // use the request payload if available
-            // the request payload has the callbackAction (like "render") after the image is received in Veras
+            // the request payload has the callbackAction, like "render"
+            // the "render" callbackAction witll immediately start a render after the image is received in Veras
             if (result != null && result.payload != null)
             {
                 payload = result.payload;
@@ -140,8 +141,8 @@ namespace VerasDotNetSample
             // send the image to Veras
             payload.image = baseImage;
             payload.edgeMap = edgeImage;
-            payload.depthMap = baseImage; // prepare own base64 encoded depth map (using baseImage as an example)
-            payload.materialMap = baseImage; // prepare own base64 encoded material map (using baseImage as an example)
+            payload.depthMap = baseImage; // TODO: Replace with actual depth map when implemented (using baseImage as placeholder)
+            payload.materialMap = baseImage; // TODO: Replace with actual material map when implemented (using baseImage as placeholder)
             
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";
