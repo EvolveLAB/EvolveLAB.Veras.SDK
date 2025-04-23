@@ -89,8 +89,8 @@ namespace VerasDotNetSample
         private void RegisterApp()
         {
             dynamic payload = new ExpandoObject();
-            payload.appName = "Enscape";
-            payload.appVersion = "4.2.0.0"; // make an empty string if not applicable
+            payload.appName = "YOUR APP NAME";
+            payload.appVersion = "YOUR APP VERSION"; // make an empty string if not applicable
             payload.useSystemAccess = false; // if true, need to implement `setRenderingsFolder` and `openrenderingsfolder`
 
             dynamic postMessage = new ExpandoObject();
@@ -132,7 +132,7 @@ namespace VerasDotNetSample
             dynamic payload = new ExpandoObject();
             // use the request payload if available
             // the request payload has the callbackAction, like "render"
-            // the "render" callbackAction will immediately start a render after the image is received in Veras
+            // the "render" callbackAction witll immediately start a render after the image is received in Veras
             if (result != null && result.payload != null)
             {
                 payload = result.payload;
@@ -143,7 +143,7 @@ namespace VerasDotNetSample
             payload.edgeMap = edgeImage;
             payload.depthMap = baseImage; // TODO: Replace with actual depth map when implemented (using baseImage as placeholder)
             payload.materialMap = baseImage; // TODO: Replace with actual material map when implemented (using baseImage as placeholder)
-
+            
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";
             postMessage.payload = payload;
