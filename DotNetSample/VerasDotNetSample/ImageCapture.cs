@@ -25,6 +25,17 @@ namespace VerasDotNetSample
             return baseImage;
         }
 
+        public string GetPreviewImageBase64StringWithLight()
+        {
+            HelixView.IsHeadLightEnabled = true;
+            string filePath = GetOrCreateImagePath();
+            Viewport3DHelper.Export(HelixView.Viewport, filePath, new SolidColorBrush(Color.FromRgb(255, 255, 255)));
+            string baseImage = ReadBase64ImageFromFile(filePath);
+            HelixView.IsHeadLightEnabled = false;
+
+            return baseImage;
+        }
+
         private string GetOrCreateImagePath()
         {
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VerasDotNetSample\\cache");

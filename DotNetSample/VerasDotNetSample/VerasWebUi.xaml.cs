@@ -61,6 +61,9 @@ namespace VerasDotNetSample
                 case "getImage":
                     GetImage();
                     break;
+                case "getImageWithLayers":
+                    GetImageWithLayers(result);
+                    break;
                 // optional - auto saves the rendering to a folder, or other internal logic
                 // this is called every time a new render is generated
                 case "saveRenderingToFolder":
@@ -109,6 +112,37 @@ namespace VerasDotNetSample
             // send the image to Veras
             dynamic payload = new ExpandoObject();
             payload.image = baseImage;
+            
+            dynamic postMessage = new ExpandoObject();
+            postMessage.action = "BaseImageChanged";
+            postMessage.payload = payload;
+
+            SendMessage(postMessage);
+        }
+        
+        /// <summary>
+        /// Gets the domain app's base image and additional layers
+        /// </summary>
+        private void GetImageWithLayers(dynamic result = null)
+        {
+            // get the image (using helix toolkit as an example)
+            string baseImage = ImageCapture.GetPreviewImageBase64String();
+            string edgeImage = ImageCapture.GetPreviewImageBase64StringWithLight();
+
+            dynamic payload = new ExpandoObject();
+            // use the request payload if available
+            // the request payload has the callbackAction, like "render"
+            // the "render" callbackAction will immediately start a render after the image is received in Veras
+            if (result != null && result.payload != null)
+            {
+                payload = result.payload;
+            }
+
+            // send the image to Veras
+            payload.image = baseImage;
+            payload.edgeMap = edgeImage;
+            payload.depthMap = baseImage; // TODO: Replace with actual depth map when implemented (using baseImage as placeholder)
+            payload.materialMap = baseImage; // TODO: Replace with actual material map when implemented (using baseImage as placeholder)
             
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";
