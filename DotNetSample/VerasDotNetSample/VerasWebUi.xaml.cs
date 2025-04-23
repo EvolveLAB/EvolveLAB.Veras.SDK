@@ -132,7 +132,7 @@ namespace VerasDotNetSample
             dynamic payload = new ExpandoObject();
             // use the request payload if available
             // the request payload has the callbackAction, like "render"
-            // the "render" callbackAction witll immediately start a render after the image is received in Veras
+            // the "render" callbackAction will immediately start a render after the image is received in Veras
             if (result != null && result.payload != null)
             {
                 payload = result.payload;
