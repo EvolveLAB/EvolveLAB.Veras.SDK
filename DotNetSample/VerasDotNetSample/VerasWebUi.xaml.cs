@@ -61,6 +61,9 @@ namespace VerasDotNetSample
                 case "getImage":
                     GetImage();
                     break;
+                case "getImageWithLayers":
+                    GetImageWithLayers(result);
+                    break;
                 // optional - auto saves the rendering to a folder, or other internal logic
                 // this is called every time a new render is generated
                 case "saveRenderingToFolder":
@@ -109,6 +112,36 @@ namespace VerasDotNetSample
             // send the image to Veras
             dynamic payload = new ExpandoObject();
             payload.image = baseImage;
+            
+            dynamic postMessage = new ExpandoObject();
+            postMessage.action = "BaseImageChanged";
+            postMessage.payload = payload;
+
+            SendMessage(postMessage);
+        }
+        
+        /// <summary>
+        /// Gets the domain app's base image
+        /// </summary>
+        private void GetImageWithLayers(dynamic result = null)
+        {
+            // get the image (using helix toolkit as an example)
+            string baseImage = ImageCapture.GetPreviewImageBase64String();
+            string edgeImage = ImageCapture.GetPreviewImageBase64StringWithLight();
+
+            dynamic payload = new ExpandoObject();
+            // use the request paylod if available
+            // the request payload has the callbackAction (like "render") after the image is received in Veras
+            if (result != null && result.payload != null)
+            {
+                payload = result.payload;
+            }
+
+            // send the image to Veras
+            payload.image = baseImage;
+            payload.edgeMap = edgeImage;
+            payload.depthMap = baseImage; // prepare own base64 encoded depth map (using baseImage as an example)
+            payload.materialMap = baseImage; // prepare own base64 encoded material map (using baseImage as an example)
             
             dynamic postMessage = new ExpandoObject();
             postMessage.action = "BaseImageChanged";
