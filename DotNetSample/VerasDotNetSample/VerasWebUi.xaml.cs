@@ -121,7 +121,7 @@ namespace VerasDotNetSample
         }
         
         /// <summary>
-        /// Gets the domain app's base image
+        /// Gets the domain app's base image and additional layers
         /// </summary>
         private void GetImageWithLayers(dynamic result = null)
         {
