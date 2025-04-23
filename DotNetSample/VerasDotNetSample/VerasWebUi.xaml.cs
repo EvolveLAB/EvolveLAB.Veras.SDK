@@ -130,7 +130,7 @@ namespace VerasDotNetSample
             string edgeImage = ImageCapture.GetPreviewImageBase64StringWithLight();
 
             dynamic payload = new ExpandoObject();
-            // use the request paylod if available
+            // use the request payload if available
             // the request payload has the callbackAction (like "render") after the image is received in Veras
             if (result != null && result.payload != null)
             {
