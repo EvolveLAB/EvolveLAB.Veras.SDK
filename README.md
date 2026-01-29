@@ -4,7 +4,8 @@
 Check out the web integration sample in action here: https://evolvelab.github.io/verasSdkSample/
 
 ## About the Veras Integration
-### Web App
+### Web App (Currently Auth Doesn't work, only .NET works)
+
 * Veras can be added to a web app as an extension
 * Veras is setup as an iframe in the parent app
 * The Veras extension and parent app communication is based on the postMessage()
