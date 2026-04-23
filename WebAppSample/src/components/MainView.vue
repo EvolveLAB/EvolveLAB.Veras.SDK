@@ -24,6 +24,7 @@
         frameBorder="0">
       </iframe>
     </div>
+    <div class="veras-resize-handle" @mousedown="resizeMouseDown"></div>
   </div>
   <v-container>
     <v-row class="text-center">
@@ -101,7 +102,6 @@ export default defineComponent({
       let shiftY: number = event.clientY - draggableContainer.getBoundingClientRect().top;
 
       draggableContainer.style.position = 'absolute';
-      draggableContainer.style.width = '850px';
       draggableContainer.style.zIndex = '1000';
 
       moveAt(event.pageX, event.pageY);
@@ -113,6 +113,35 @@ export default defineComponent({
 
       function onMouseMove(event: MouseEvent): void {
         moveAt(event.pageX, event.pageY);
+      }
+
+      window.addEventListener('mousemove', onMouseMove);
+
+      window.onmouseup = (): void => {
+        window.removeEventListener('mousemove', onMouseMove);
+        window.onmouseup = null;
+        this.isDragging = false;
+      };
+    },
+    resizeMouseDown(event: MouseEvent): void {
+      event.preventDefault();
+      event.stopPropagation();
+      const draggableContainer = this.$refs.draggableContainer as HTMLElement;
+      this.isDragging = true;
+
+      const rect = draggableContainer.getBoundingClientRect();
+      const startWidth = rect.width;
+      const startHeight = rect.height;
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const minWidth = 400;
+      const minHeight = 300;
+
+      function onMouseMove(event: MouseEvent): void {
+        const newWidth = Math.max(minWidth, startWidth + (event.clientX - startX));
+        const newHeight = Math.max(minHeight, startHeight + (event.clientY - startY));
+        draggableContainer.style.width = newWidth + 'px';
+        draggableContainer.style.height = newHeight + 'px';
       }
 
       window.addEventListener('mousemove', onMouseMove);
@@ -185,6 +214,27 @@ export default defineComponent({
 
 .veras-drag-handle {
     cursor: move;
+}
+
+.veras-resize-handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
+    z-index: 30;
+    background:
+        linear-gradient(135deg,
+            transparent 0%,
+            transparent 45%,
+            #888 45%,
+            #888 55%,
+            transparent 55%,
+            transparent 70%,
+            #888 70%,
+            #888 80%,
+            transparent 80%);
 }
 
 </style>
