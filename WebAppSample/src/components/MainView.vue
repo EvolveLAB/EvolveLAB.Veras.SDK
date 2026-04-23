@@ -6,9 +6,9 @@
     <div class="flex h-100 w-100 text-right">
       <div class="d-flex justify-space-between veras-drag-handle" @mousedown="dragMouseDown">
         <label class="h-50 text-body-2 mt-1">EvolveLAB Veras</label>
-        <v-btn 
-          density="compact" 
-          icon="mdi-close" 
+        <v-btn
+          density="compact"
+          icon="mdi-close"
           variant="plain"
           class="mb-1"
           @click="startVeras">
@@ -220,20 +220,20 @@ export default defineComponent({
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     cursor: nwse-resize;
     z-index: 30;
     background:
         linear-gradient(135deg,
             transparent 0%,
-            transparent 45%,
-            #888 45%,
-            #888 55%,
             transparent 55%,
-            transparent 70%,
-            #888 70%,
-            #888 80%,
+            #ccc 55%,
+            #ccc 60%,
+            transparent 60%,
+            transparent 75%,
+            #ccc 75%,
+            #ccc 80%,
             transparent 80%);
 }
 
