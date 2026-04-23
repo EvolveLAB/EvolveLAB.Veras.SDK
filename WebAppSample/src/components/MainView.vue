@@ -1,11 +1,10 @@
 <template>
-  <div 
-    ref="draggableContainer" 
+  <div
+    ref="draggableContainer"
     v-if="showVerasPane"
-    class="veras-modal" 
-    @mousedown="dragMouseDown">
+    class="veras-modal">
     <div class="flex h-100 w-100 text-right">
-      <div class="d-flex justify-space-between">
+      <div class="d-flex justify-space-between veras-drag-handle" @mousedown="dragMouseDown">
         <label class="h-50 text-body-2 mt-1">EvolveLAB Veras</label>
         <v-btn 
           density="compact" 
@@ -17,7 +16,6 @@
       </div>
       <div
         v-show="isDragging"
-        v-on:click="isDragging = !isDragging"
         class="veras-dragmask h-100 w-100">
       </div>
       <iframe
@@ -119,9 +117,10 @@ export default defineComponent({
 
       window.addEventListener('mousemove', onMouseMove);
 
-      window.onmouseup = function (): void {
+      window.onmouseup = (): void => {
         window.removeEventListener('mousemove', onMouseMove);
         window.onmouseup = null;
+        this.isDragging = false;
       };
     }
   },
@@ -182,6 +181,10 @@ export default defineComponent({
     position: absolute;
     padding: 8px;
     z-index: 20;
+}
+
+.veras-drag-handle {
+    cursor: move;
 }
 
 </style>
