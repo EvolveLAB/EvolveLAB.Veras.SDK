@@ -113,8 +113,8 @@ mounted(){
 
 # TODO
 ### Sample Project
-- [ ] add a way to resize the Veras window
-- [ ] fix first click on the Veras UI being ignored, after moving the Veras window
+- [x] add a way to resize the Veras window
+- [x] fix first click on the Veras UI being ignored, after moving the Veras window
 - [ ] add other tech stacks for implementation (let us know if you want to see more examples)
 - [ ] sample code to scale the canvas resolution
 
